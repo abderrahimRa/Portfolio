@@ -3,19 +3,14 @@ import NavBar from "./components/Navbar";
 import Profile from "./components/Profile";
 import "./index.css";
 
-const ListItems: string[] = [
-  // TODO:
-  "History",
-  "Hope",
-  "experience",
-  "skills",
-  "contact",
-];
+const ListItems: string[] = ["Home", "experience", "skills", "contact"];
+
 
 const App = () => (
-  <div className="flex flex-col h-screen">
+  <div className="flex h-screen flex-col">
     <NavBar menuItems={ListItems} />
-    <Profile />
+    <Profile></Profile>
+    
   </div>
 );
 
