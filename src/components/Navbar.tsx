@@ -10,10 +10,10 @@ const NavBar: React.FC<Navitems> = ({ menuItems }) => (
       </li>
 
       <div className="flex w-full justify-evenly sm:w-auto sm:space-x-3 md:space-x-5">
-        {menuItems.map((item, index) => (
+        {menuItems.map((item) => (
           <li
             className="flex cursor-pointer rounded-md px-2 py-1 text-[#5f97b6] hover:bg-[#5f97b6] hover:text-white sm:px-3 sm:text-lg md:text-xl lg:p-3"
-            key={index}
+            key={item}
           >
             {item}
           </li>
