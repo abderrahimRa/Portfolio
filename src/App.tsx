@@ -8,7 +8,7 @@ const ListItems: string[] = ["Home", "Experience", "Skills", "Contact"];
 
 const App = () => (
   <div className="flex h-screen flex-col">
-    {/* Passing menuItems and icons to NavBar */}
+    
     <Navbar menuItems={ListItems} />
     <Profile />
   </div>
