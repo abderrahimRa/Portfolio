@@ -8,6 +8,7 @@ interface Item {
   icon: React.ElementType;
 }
 
+
 interface CardProps {
   item: Item;
   index: number;
@@ -70,7 +71,7 @@ const Card: React.FC<CardProps> = ({ item, index, onClick }) => {
         boxShadow: "0 4px 6px rgba(60, 148, 132, 0.1), 0 0 0 2px #3c9484",
         transition: "box-shadow 0.3s ease-in-out",
       }}
-      className="hidden lg:flex lg:flex-col items-center justify-center text-white"
+      className="hidden md:flex md:flex-col items-center justify-center text-white"
     >
       <motion.div className="mb-4 text-4xl">
         <item.icon />

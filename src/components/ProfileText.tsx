@@ -1,21 +1,38 @@
-import { TypeAnimation } from "react-type-animation";
-
+  import { motion } from "framer-motion";
+  import { TypeAnimation } from "react-type-animation";
+ const itemVariants = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+    },
+  },
+};
 const ProfileText = () => {
   return (
-    <div className="text-xl font-bold text-white">
+    <motion.div
+      className="flex items-center justify-center text-center text-xl font-bold text-white lg:justify-self-start lg:text-2xl"
+      variants={itemVariants}
+    >
       <TypeAnimation
         style={{
-          height: "300px",
-          display: "block",
+          height: "170px",
+          display: "inline-block",
+          whiteSpace: "pre-line",
         }}
         sequence={[
-          `Hi iam Abderrahim Khobizi\n I'am frontend developer\ni have others skills want to see more ? \n`, // actual line-break inside string literal also gets animated in new line, but ensure there are no leading spaces
+          `Hi, I am Abderrahim Khobizi\n\nI'm a frontend developer\n\nI have other skills`,
           5000,
           "",
         ]}
         repeat={Infinity}
+        speed={50}
+        deletionSpeed={65}
       />
-    </div>
+    </motion.div>
   );
 };
 
