@@ -1,6 +1,6 @@
-  import { motion } from "framer-motion";
-  import { TypeAnimation } from "react-type-animation";
- const itemVariants = {
+import { motion } from "framer-motion";
+import { TypeAnimation } from "react-type-animation";
+const itemVariants = {
   hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,

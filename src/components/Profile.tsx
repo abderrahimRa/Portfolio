@@ -17,7 +17,6 @@ const Profile: React.FC = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   const iconsList = useMemo(() => [BsFacebook, BsLinkedin, BsTelegram], []);
-
   const cardItems: Item[] = useMemo(
     () => [
       {
@@ -66,7 +65,7 @@ const Profile: React.FC = () => {
 
   return (
     <motion.div
-      className="us flex h-[calc(100vh-68px)] w-full bg-gray-900 p-4"
+      className="flex h-[calc(100vh-68px)] w-full bg-gray-900 p-4"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
@@ -93,11 +92,11 @@ const Profile: React.FC = () => {
             variants={itemVariants}
             className="w-full max-w-[300px] md:flex md:h-full md:max-w-[100vw] md:items-end md:justify-center md:pr-4"
           >
-            <div className="flex h-fit w-full items-center justify-center pb-6 lg:pb-0">
-              <ContactNav icons={iconsList} />
+            <div className="flex h-fit w-full items-center justify-center lg:pb-0">
+              <ContactNav icons={iconsList} />;
             </div>
           </motion.div>
-          <div className="hidden md:flex md:h-full md:w-full md:place-items-center md:justify-end md:pt-20 lg:pt-6">
+          <div className="hidden items-end justify-center md:flex md:h-1/6 md:w-full lg:mb-10 xl:pb-8">
             <motion.div
               className="md:perspective-1000 hidden h-fit w-full md:relative md:mx-auto md:flex md:max-w-md"
               variants={containerVariants}
