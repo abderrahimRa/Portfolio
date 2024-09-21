@@ -14,6 +14,7 @@ interface ClickedCardProps {
   cardItems: Item[];
 }
 
+
 const ClickedCard: React.FC<ClickedCardProps> = ({
   selectedId,
   setSelectedId,
