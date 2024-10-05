@@ -1,81 +1,29 @@
-import React, { useState, useMemo } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  RiNumber1,
-  RiNumber2,
-  RiNumber3,
-  RiNumber4,
-  RiNumber5,
-} from "react-icons/ri";
+import { NumListIcon } from "./HeroEx";
+import { useListed } from "../assets/Listed";
+import SkillsEx from "./SkillsEx";
 
-interface NumListIcon {
-  id: string;
-  icon: React.ElementType;
-  insideHeader: string;
-  insideText: string;
-}
-
-interface NumProps {
+interface NumListProps {
+  selectedItem: NumListIcon;
+  setSelectedItem: (item: NumListIcon) => void;
   className?: string;
 }
 
-const NumList: React.FC<NumProps> = ({ className }) => {
-  const IconList = useMemo(
-    () => [RiNumber1, RiNumber2, RiNumber3, RiNumber4, RiNumber5],
-    [],
-  );
-  const Listed: NumListIcon[] = useMemo(
-    () => [
-      {
-        id: "1",
-        icon: IconList[0],
-        insideHeader: "Freelance Web Developer",
-        insideText:
-          "Developing modern, responsive websites with a focus on frontend and full-stack development. Proficient in React, Tailwind CSS. Experienced in building projects with Vite and utilizing TypeScript for type safety. Specialized in optimizing websites for performance and scalability while maintaining clean, maintainable code.",
-      },
-      {
-        id: "2",
-        icon: IconList[1],
-        insideHeader: "IoT Medical Project",
-        insideText:
-          "Built an innovative IoT system using an ESP32 microcontroller to monitor patient health data. Developed a web-based dashboard for healthcare professionals to view real-time patient biodata. Employed technologies like HTML, CSS, JavaScript, Bootstrap, Tailwind, MySQL, Node.js, and Express. Achieved a thesis score of 17.5/20.",
-      },
-      {
-        id: "3",
-        icon: IconList[2],
-        insideHeader: "Chess Enthusiast",
-        insideText:
-          "Developed advanced problem-solving and critical thinking skills through chess, achieving an Elo rating of 2150 in online platforms. Regularly competes in over-the-board tournaments, consistently beating players with ratings of 1700 and above.",
-      },
-      {
-        id: "4",
-        icon: IconList[3],
-        insideHeader: "Master's Student in Industrial Engineering",
-        insideText:
-          "Currently pursuing a Master's degree in Industrial Engineering with a focus on System Engineering at the University of Tlemcen. Gained in-depth knowledge of optimization algorithms, particularly those used in industrial engineering applications.",
-      },
-      {
-        id: "5",
-        icon: IconList[4],
-        insideHeader: "Frontend Developer for Portfolio Projects",
-        insideText:
-          "Actively learning and applying React in various portfolio project, focusing on responsive design, animation (Framer Motion), and user experience. Experience with React components, props, state management, and Tailwind CSS. Created a responsive, interactive portfolio with visually appealing elements, such as neon effects, hover animations, and typewriting text.",
-      },
-    ],
-    [IconList],
-  );
-
-  const [selectedItem, setSelectedItem] = useState<NumListIcon | null>(
-    Listed[0],
-  );
+const NumList: React.FC<NumListProps> = ({
+  selectedItem,
+  setSelectedItem,
+  className,
+}) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+  const listedItems = useListed();
 
   return (
-    <div className="flex h-full w-full flex-col items-start p-4 md:flex-row md:space-x-8 md:space-y-0 md:p-8">
+    <div className="flex flex-col items-start p-4 md:flex-row md:space-x-8 md:space-y-0 md:p-8 lg:h-full lg:w-full">
       <div
-        className={`${className} relative flex h-full w-full flex-col items-center md:w-fit`}
+        className={`${className} relative flex h-[10vh] w-full flex-row items-center justify-evenly px-2 md:h-full md:w-fit md:flex-col md:justify-start`}
       >
-        {Listed.map((item, index) => (
+        {listedItems.map((item, index) => (
           <React.Fragment key={item.id}>
             <motion.div
               className="group relative"
@@ -84,27 +32,28 @@ const NumList: React.FC<NumProps> = ({ className }) => {
               onClick={() => setSelectedItem(item)}
             >
               <motion.div
-                className="flex h-16 w-16 cursor-pointer items-center justify-center rounded-full bg-gray-800 transition-all duration-300 ease-in-out"
+                className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-gray-800 transition-all duration-300 ease-in-out md:h-14 md:w-14"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
                 animate={{
                   boxShadow:
-                    hoveredIndex === index || selectedItem?.id === item.id
+                    hoveredIndex === index || selectedItem.id === item.id
                       ? "0 0 20px rgba(70, 177, 155, 0.4), inset 0 0 10px rgba(70, 177, 155, 0.4)"
                       : "0 0 5px rgba(60, 148, 132, 0.2)",
                   backgroundColor:
-                    hoveredIndex === index || selectedItem?.id === item.id
+                    hoveredIndex === index || selectedItem.id === item.id
                       ? "#1e2a38"
                       : "#1a202c",
                 }}
                 transition={{ duration: 0.2 }}
               >
-                <item.icon className="text-3xl text-[#46b19b] transition-colors duration-300 group-hover:text-[#5cead6]" />
+                <item.icon className="text-xl text-[#46b19b] transition-colors duration-300 group-hover:text-[#5cead6] md:text-3xl" />
               </motion.div>
             </motion.div>
-            {index < Listed.length - 1 && (
+
+            {index < listedItems.length - 1 && (
               <motion.div
-                className="h-8 w-0.5 bg-[#46b19b]"
+                className="h-0.5 w-[15vw] bg-[#46b19b] md:h-8 md:w-0.5"
                 initial={{ scaleY: 0, opacity: 0 }}
                 animate={{ scaleY: 1, opacity: 1 }}
                 transition={{ duration: 0.3, delay: index * 0.1 }}
@@ -116,44 +65,47 @@ const NumList: React.FC<NumProps> = ({ className }) => {
           </React.Fragment>
         ))}
       </div>
-
-      <AnimatePresence mode="wait">
-        {selectedItem && (
-          <motion.div
-            key={selectedItem.id}
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: 50 }}
-            transition={{ duration: 0.3 }}
-            className="flex w-full flex-col rounded-lg bg-gray-800 p-4 text-white shadow-lg md:w-2/3 md:p-8"
-            style={{
-              boxShadow:
-                "0 0 20px rgba(70, 177, 155, 0.4), inset 0 0 10px rgba(70, 177, 155, 0.4)",
-              border: "2px solid rgba(70, 177, 155, 0.3)",
-            }}
-          >
-            <motion.h2
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.1 }}
-              className="mb-4 text-2xl font-bold text-[#46b19b] md:text-4xl"
+      <div className="flex w-full flex-col">
+        <AnimatePresence mode="wait">
+          {selectedItem && (
+            <motion.div
+              key={selectedItem.id}
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 50 }}
+              transition={{ duration: 0.3 }}
+              className="flex h-full flex-col overflow-y-auto rounded-lg bg-gray-800 p-4 text-white shadow-lg sm:w-full md:h-fit"
               style={{
-                textShadow: "0 0 10px rgba(70, 177, 155, 0.7)",
+                boxShadow:
+                  "0 0 20px rgba(70, 177, 155, 0.4), inset 0 0 10px rgba(70, 177, 155, 0.4)",
+                border: "2px solid rgba(70, 177, 155, 0.3)",
               }}
             >
-              {selectedItem.insideHeader}
-            </motion.h2>
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3, delay: 0.2 }}
-              className="text-base leading-relaxed md:text-lg"
-            >
-              {selectedItem.insideText}
-            </motion.p>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.3 }}
+              >
+                <div className="mb-2 flex items-center space-x-4">
+                  <selectedItem.themeIcon className="text-2xl text-[#5cead6]" />
+                  <h2 className="text-xl font-semibold text-[#46b19b] md:text-3xl">
+                    {selectedItem.insideHeader}
+                  </h2>
+                </div>
+
+                <p className="text-base font-semibold text-gray-300 md:text-xl">
+                  {selectedItem.insideText}
+                </p>
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        <SkillsEx
+          selectedItem={selectedItem}
+          setSelectedItem={setSelectedItem}
+        />
+      </div>
     </div>
   );
 };

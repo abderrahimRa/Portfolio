@@ -2,9 +2,6 @@ import { motion } from "framer-motion";
 
 interface ProfileProps {
   children: React.ReactNode;
-}
-
-interface ProfileProps {
   className?: string;
 }
 

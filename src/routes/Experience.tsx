@@ -1,6 +1,6 @@
 import { ListItems } from "../App";
+import HeroEx from "../components/HeroEx";
 import NavBar from "../components/Navbar";
-import NumList from "../components/NumList";
 import Profile from "../components/Profile";
 
 const Experience = () => {
@@ -8,8 +8,9 @@ const Experience = () => {
     <div className="">
       <NavBar menuItems={ListItems} />
       <Profile className="">
-        <NumList/>
-        
+        <HeroEx>
+          <div></div>
+        </HeroEx>
       </Profile>
     </div>
   );

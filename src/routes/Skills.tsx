@@ -1,12 +1,16 @@
 import { ListItems } from "../App";
+import { skillsData } from "../assets/data/SkillsData";
 import NavBar from "../components/Navbar";
 import Profile from "../components/Profile";
+import SkillsCard from "../components/SkillsCard";
 
 const Skills = () => {
   return (
     <div>
       <NavBar menuItems={ListItems} />
-      <Profile children />
+      <Profile className="">
+        <SkillsCard skills={skillsData} />
+      </Profile>
     </div>
   );
 };
