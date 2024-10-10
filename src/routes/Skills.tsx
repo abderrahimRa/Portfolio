@@ -8,7 +8,7 @@ const Skills = () => {
   return (
     <div>
       <NavBar menuItems={ListItems} />
-      <Profile className="">
+      <Profile className="h-fit w-fit">
         <SkillsCard skills={skillsData} />
       </Profile>
     </div>

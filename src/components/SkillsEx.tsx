@@ -11,10 +11,10 @@ const SkillsEx: React.FC<SkillsExProps> = ({ selectedItem }) => {
   const [hoveredSkill, setHoveredSkill] = useState<string | null>(null);
 
   const containerVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
+    hidden: { opacity: 0, x: -100 },
     visible: {
       opacity: 1,
-      scale: 1,
+      x: 0,
       transition: {
         duration: 0.5,
         staggerChildren: 0.1,
@@ -22,7 +22,7 @@ const SkillsEx: React.FC<SkillsExProps> = ({ selectedItem }) => {
     },
     exit: {
       opacity: 0,
-      scale: 0.8,
+      x: 100,
       transition: {
         duration: 0.5,
       },
@@ -30,11 +30,10 @@ const SkillsEx: React.FC<SkillsExProps> = ({ selectedItem }) => {
   };
 
   const skillVariants = {
-    hidden: { opacity: 0, y: 20, rotateX: -90 },
+    hidden: { opacity: 0, x: -50 },
     visible: (index: number) => ({
       opacity: 1,
-      y: 0,
-      rotateX: 0,
+      x: 0,
       transition: {
         type: "spring",
         stiffness: 100,
@@ -42,7 +41,7 @@ const SkillsEx: React.FC<SkillsExProps> = ({ selectedItem }) => {
         delay: index * 0.1,
       },
     }),
-    exit: { opacity: 0, y: -20, rotateX: 90 },
+    exit: { opacity: 0, x: 50 },
     hover: {
       scale: 1.05,
       rotateY: 5,
@@ -56,11 +55,11 @@ const SkillsEx: React.FC<SkillsExProps> = ({ selectedItem }) => {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 20 }}
       transition={{ duration: 0.5 }}
-      className="relative mt-4 flex max-h-[45vh] min-w-[250px] flex-col overflow-auto rounded-lg bg-gray-800 p-6 shadow-lg lg:min-w-[436px]"
+      className="relative mt-4 flex  min-w-[250px] flex-col overflow-auto rounded-lg bg-gray-800 p-6 shadow-lg lg:min-w-[436px]"
       style={{
         boxShadow:
           "0 0 20px rgba(70, 177, 155, 0.4), inset 0 0 10px rgba(70, 177, 155, 0.4)",

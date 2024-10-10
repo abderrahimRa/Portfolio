@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface Skill {
   skill: string;
   proficiency: number;
+  language?: string;
 }
 
 interface LanguageSkill extends Skill {
   language: string;
 }
-
 
 interface SkillsData {
   technicalSkills: Skill[];
@@ -24,31 +24,32 @@ interface SkillsCardProps {
 
 const SkillsCard: React.FC<SkillsCardProps> = ({ skills }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const categories = ['Technical Skills', 'Language Skills', 'Soft Skills'];
-
+  const categories = ["Technical Skills", "Language Skills", "Soft Skills"];
   const nextCategory = () => {
     setActiveIndex((prevIndex) => (prevIndex + 1) % categories.length);
   };
 
   const prevCategory = () => {
-    setActiveIndex((prevIndex) => (prevIndex - 1 + categories.length) % categories.length);
+    setActiveIndex(
+      (prevIndex) => (prevIndex - 1 + categories.length) % categories.length,
+    );
   };
 
   const variants = {
     enter: (direction: number) => ({
       x: direction > 0 ? 1000 : -1000,
-      opacity: 0
+      opacity: 0,
     }),
     center: {
       zIndex: 1,
       x: 0,
-      opacity: 1
+      opacity: 1,
     },
     exit: (direction: number) => ({
       zIndex: 0,
       x: direction < 0 ? 1000 : -1000,
-      opacity: 0
-    })
+      opacity: 0,
+    }),
   };
 
   const swipeConfidenceThreshold = 10000;
@@ -57,26 +58,36 @@ const SkillsCard: React.FC<SkillsCardProps> = ({ skills }) => {
   };
 
   const SkillList = ({ list }: { list: (Skill | LanguageSkill)[] }) => (
-    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
       {list.map((skill, index) => (
         <motion.div
           key={index}
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
-          className="relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 p-6 shadow-lg"
-          style={{
-            boxShadow: '0 4px 6px -1px rgba(0, 255, 128, 0.1), 0 2px 4px -1px rgba(0, 255, 128, 0.06)'
+          whileHover={{
+            scale: 1.05,
+            boxShadow: "0 8px 16px rgba(0, 255, 128, 0.2)",
+            background: "linear-gradient(135deg, #1F2937 0%, #111827 100%)",
           }}
+          className="relative cursor-pointer overflow-hidden rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 p-6 shadow-lg transition-all duration-300 ease-in-out"
         >
-          <div className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-green-500 opacity-10"></div>
+          <motion.div
+            className="absolute -right-4 -top-4 h-24 w-24 rounded-full bg-green-500 opacity-10"
+            whileHover={{ scale: 1.2, opacity: 0.2 }}
+          />
           <h4 className="mb-4 text-xl font-bold text-white">
-            {('language' in skill) ? `${skill.language}: ${skill.skill}` : skill.skill}
+            {"language" in skill
+              ? `${skill.language}: ${skill.skill}`
+              : skill.skill}
           </h4>
           <div className="flex items-center justify-between">
-            <div className="text-3xl font-extrabold text-green-400">
+            <motion.div
+              className="text-3xl font-extrabold text-green-400"
+              whileHover={{ scale: 1.1, color: "#34D399" }}
+            >
               {skill.proficiency}%
-            </div>
+            </motion.div>
             <div className="h-16 w-16">
               <svg viewBox="0 0 100 100" className="h-full w-full">
                 <circle
@@ -97,9 +108,10 @@ const SkillsCard: React.FC<SkillsCardProps> = ({ skills }) => {
                   strokeLinecap="round"
                   initial={{ strokeDasharray: "0 283" }}
                   animate={{
-                    strokeDasharray: `${skill.proficiency * 2.83} 283`
+                    strokeDasharray: `${skill.proficiency * 2.83} 283`,
                   }}
                   transition={{ duration: 1, ease: "easeInOut" }}
+                  whileHover={{ stroke: "#34D399" }}
                 />
               </svg>
             </div>
@@ -116,12 +128,15 @@ const SkillsCard: React.FC<SkillsCardProps> = ({ skills }) => {
       transition={{ duration: 0.5 }}
       className="relative overflow-hidden rounded-xl bg-gradient-to-br from-gray-900 to-gray-800 p-8 shadow-2xl"
       style={{
-        boxShadow: '0 25px 50px -12px rgba(0, 255, 128, 0.25)'
+        boxShadow: "0 25px 50px -12px rgba(0, 255, 128, 0.25)",
       }}
     >
-      <h2 className="mb-8 text-center text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-300 to-green-600">
+      <motion.h2
+        className="mb-8 bg-gradient-to-r from-green-300 to-green-600 bg-clip-text text-center text-4xl font-extrabold text-transparent"
+        whileHover={{ scale: 1.05 }}
+      >
         My Skills
-      </h2>
+      </motion.h2>
 
       <div className="relative h-[600px]">
         <AnimatePresence initial={false} custom={activeIndex}>
@@ -133,8 +148,8 @@ const SkillsCard: React.FC<SkillsCardProps> = ({ skills }) => {
             animate="center"
             exit="exit"
             transition={{
-              x: { type: 'spring', stiffness: 300, damping: 30 },
-              opacity: { duration: 0.2 }
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
             }}
             drag="x"
             dragConstraints={{ left: 0, right: 0 }}
@@ -148,18 +163,21 @@ const SkillsCard: React.FC<SkillsCardProps> = ({ skills }) => {
                 prevCategory();
               }
             }}
-            className="absolute w-full"
+            className="absolute h-[70vh] w-full overflow-auto"
           >
-            <h3 className="mb-6 text-center text-2xl font-bold text-green-400">
+            <motion.h3
+              className="mb-6 text-center text-2xl font-bold text-green-400"
+              whileHover={{ scale: 1.05, color: "#34D399" }}
+            >
               {categories[activeIndex]}
-            </h3>
+            </motion.h3>
             <SkillList
               list={
                 activeIndex === 0
                   ? skills.technicalSkills
                   : activeIndex === 1
-                  ? skills.languageSkills
-                  : skills.softSkills
+                    ? skills.languageSkills
+                    : skills.softSkills
               }
             />
           </motion.div>
@@ -167,7 +185,7 @@ const SkillsCard: React.FC<SkillsCardProps> = ({ skills }) => {
       </div>
 
       <motion.div
-        className="absolute left-4 top-1/2 -translate-y-1/2 transform z-10"
+        className="absolute left-4 top-1/2 z-10 transform"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
@@ -179,7 +197,7 @@ const SkillsCard: React.FC<SkillsCardProps> = ({ skills }) => {
         </button>
       </motion.div>
       <motion.div
-        className="absolute right-4 top-1/2 -translate-y-1/2 transform z-10"
+        className="absolute right-4 top-1/2 z-10 transform"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
@@ -196,11 +214,12 @@ const SkillsCard: React.FC<SkillsCardProps> = ({ skills }) => {
           <motion.div
             key={index}
             className={`h-3 w-3 rounded-full ${
-              index === activeIndex ? 'bg-green-400' : 'bg-gray-600'
+              index === activeIndex ? "bg-green-400" : "bg-gray-600"
             }`}
             initial={false}
             animate={{ scale: index === activeIndex ? 1.5 : 1 }}
             transition={{ duration: 0.3 }}
+            whileHover={{ scale: 1.2, backgroundColor: "#34D399" }}
           />
         ))}
       </div>

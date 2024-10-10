@@ -14,7 +14,6 @@ interface ClickedCardProps {
   cardItems: Item[];
 }
 
-
 const ClickedCard: React.FC<ClickedCardProps> = ({
   selectedId,
   setSelectedId,
@@ -85,10 +84,7 @@ const ClickedCard: React.FC<ClickedCardProps> = ({
                   >
                     {item?.subtitle}
                   </motion.h5>
-                  <motion.p className="mt-6 text-gray-400">
-                    This is where you can add more detailed information about
-                    your {item?.title.toLowerCase()} skills and experience.
-                  </motion.p>
+                  <motion.p className="mt-6 text-gray-400"></motion.p>
                   <motion.button
                     className="mt-8 w-full rounded-lg bg-[#3c9484] px-6 py-3 text-lg text-white transition-colors hover:bg-[#46b19b]"
                     onClick={() => setSelectedId(null)}

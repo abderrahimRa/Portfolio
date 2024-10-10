@@ -1,11 +1,14 @@
 import React, { useState, useMemo } from "react";
 import { motion } from "framer-motion";
 import ContactNav from "../components/ContactNav";
-import { BsFacebook, BsLinkedin, BsTelegram } from "react-icons/bs";
 import Card from "../components/Card";
 import ProfileText from "../components/ProfileText";
 import ClickedCard from "../components/ClickedCard";
 import Profile from "../components/Profile";
+import { IoCodeSlash } from "react-icons/io5";
+import { GiPaintBucket } from "react-icons/gi";
+import { CiMobile1 } from "react-icons/ci";
+import { socialLinks } from "../assets/data/ContactData";
 
 interface Item {
   id: string;
@@ -17,26 +20,25 @@ interface Item {
 const Home: React.FC = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const iconsList = useMemo(() => [BsFacebook, BsLinkedin, BsTelegram], []);
   const cardItems: Item[] = useMemo(
     () => [
       {
         id: "1",
         title: "Web Development",
         subtitle: "Frontend Specialist",
-        icon: BsFacebook,
+        icon: IoCodeSlash,
       },
       {
         id: "2",
         title: "UI/UX Design",
         subtitle: "Creative Designer",
-        icon: BsLinkedin,
+        icon: GiPaintBucket,
       },
       {
         id: "3",
-        title: "Mobile Development",
-        subtitle: "React Native Expert",
-        icon: BsTelegram,
+        title: "Responsive web development",
+        subtitle: "React Programmer",
+        icon: CiMobile1,
       },
     ],
     [],
@@ -89,7 +91,7 @@ const Home: React.FC = () => {
             className="w-full max-w-[300px] md:flex md:h-full md:max-w-[100vw] md:items-end md:justify-center md:pr-4"
           >
             <div className="flex h-fit w-full items-center justify-center lg:pb-0">
-              <ContactNav icons={iconsList} />;
+              <ContactNav socialLinks={socialLinks} />;
             </div>
           </motion.div>
           <div className="hidden items-end justify-center md:flex md:h-1/6 md:w-full lg:mb-10 xl:pb-8">

@@ -65,7 +65,7 @@ const NumList: React.FC<NumListProps> = ({
           </React.Fragment>
         ))}
       </div>
-      <div className="flex w-full flex-col">
+      <div className="flex w-full max-h-[70vh] md:max-h-none flex-col">
         <AnimatePresence mode="wait">
           {selectedItem && (
             <motion.div
@@ -74,7 +74,7 @@ const NumList: React.FC<NumListProps> = ({
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: 50 }}
               transition={{ duration: 0.3 }}
-              className="flex h-full flex-col overflow-y-auto rounded-lg bg-gray-800 p-4 text-white shadow-lg sm:w-full md:h-fit"
+              className="flex h-full flex-col overflow-y-auto max-h-[20vh] rounded-lg bg-gray-800 p-4 text-white shadow-lg sm:w-full md:h-fit"
               style={{
                 boxShadow:
                   "0 0 20px rgba(70, 177, 155, 0.4), inset 0 0 10px rgba(70, 177, 155, 0.4)",
@@ -89,12 +89,12 @@ const NumList: React.FC<NumListProps> = ({
               >
                 <div className="mb-2 flex items-center space-x-4">
                   <selectedItem.themeIcon className="text-2xl text-[#5cead6]" />
-                  <h2 className="text-xl font-semibold text-[#46b19b] md:text-3xl">
+                  <h2 className="text-xl font-semibold  text-[#46b19b] md:text-3xl">
                     {selectedItem.insideHeader}
                   </h2>
                 </div>
 
-                <p className="text-base font-semibold text-gray-300 md:text-xl">
+                <p className="text-base font-semibold hidden sm:flex text-gray-300 md:text-lg">
                   {selectedItem.insideText}
                 </p>
               </motion.div>
